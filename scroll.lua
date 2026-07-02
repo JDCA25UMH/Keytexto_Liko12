@@ -6,6 +6,7 @@ text=""
 lins= {}
 local scroll = 0 
 local lh =8
+local salto= false
 function textoreal(text,x,y)
 buffer = {}
 text = text
@@ -17,12 +18,9 @@ for parte in text:gmatch("[^\t]+")do
 table.insert(buffer,parte)
 
 color(00)
-
 print(parte,x,yy)
 yy=yy+8
-if text:find("\t\t")then
-yy=yy+8
-end
+
 end
 
 end
@@ -41,6 +39,7 @@ end
 
 function _textinput(t)
 text= text..t
+
 end
 function _keypressed(tecla)
 if tecla=="backspace"then
@@ -48,7 +47,10 @@ if tecla=="backspace"then
 text= text:sub(1,-2)
 elseif tecla == "tab"then
 text = text.."\t"
-
+ salto = true
+if salto== true then
+text=text.."\n"
+end
 end
 end
 
